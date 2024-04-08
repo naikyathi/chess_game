@@ -1,0 +1,284 @@
+// import { Console } from "console";
+
+// import { Piece, PieceType, TeamType, postion, samePosition } from "../Cconstants";
+// export default class referee1 {
+//     tileIsEmptyOrOccupiedbyOpponent(position: postion,
+//         boardState: Piece[],
+//         team: TeamType
+//     ) {
+//         return this.tileIsOccupied(position, boardState) || this.tileIsOccupiedByOpponent(position, boardState, team);
+//     }
+//     tileIsOccupied(position: postion, boardState: Piece[]): boolean {
+
+//         const piece = boardState.find((p) => samePosition(p.position, position));
+
+//         if (piece) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     }
+
+
+//     tileIsOccupiedByOpponent(position: postion, boardState: Piece[], team: TeamType): boolean {
+//         const piece = boardState.find(
+//             (p) => samePosition(p.position, position) && p.team !== team)
+
+//         if (piece) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+
+//     }
+//     isEnPassantMove(
+//         initialPostion: postion,
+//         desiredPostion: postion,
+//         type: PieceType,
+//         team: TeamType,
+//         boardState: Piece[]) {
+//         const pawnDirection = team === TeamType.OUR ? 1 : -1;
+
+
+
+
+
+
+//         if (type === PieceType.PAWN) {
+//             if ((desiredPostion.x - initialPostion.x === -1 || desiredPostion.x - initialPostion.x === 1) && desiredPostion.y - initialPostion.y === pawnDirection) {
+
+//                 const piece = boardState.find
+//                     ((p) => p.position.x === desiredPostion.x && p.position.y === desiredPostion.y - pawnDirection && p.enPassant)
+
+//                 if (piece) {
+//                     return true;
+//                 }
+
+//             }
+
+
+//         }
+
+
+
+//         // if the attacking piece is a pawn
+//         // upper left / upper right|| bottom left/bottm right
+//         // if a peice is under /above the attacked tile
+//         // if the attacked piece has made an en passant move in the pervious turn
+
+//         // put peice in correct postion
+//         //remove en passent peice
+
+//         return false
+//     }
+
+//     isvalidMove(
+//         initialPostion: postion,
+//         desiredPostion: postion,
+//         type: PieceType,
+//         team: TeamType,
+//         boardState: Piece[]) {
+
+
+//         // movement logic
+//         const pawnDirection = team === TeamType.OUR ? 1 : -1;
+
+
+//         if (type === PieceType.PAWN) {
+//             const specialRow = (team === TeamType.OUR) ? 1 : 6;
+//             const pawnDirection = (team === TeamType.OUR) ? 1 : -1;
+
+//             if (initialPostion.x === desiredPostion.x && initialPostion.y === specialRow && desiredPostion.y - initialPostion.y === 2 * pawnDirection) {
+//                 if (!this.tileIsOccupied(desiredPostion, boardState) && !this.tileIsOccupied({ x: desiredPostion.x, y: desiredPostion.y - pawnDirection }, boardState)) {
+//                     return true;
+//                 }
+//             } else if (initialPostion.x === desiredPostion.x && desiredPostion.y - initialPostion.y === pawnDirection) {
+//                 if (!this.tileIsOccupied(desiredPostion, boardState)) {
+//                     return true;
+//                 }
+//             }
+//             // attacking logic
+//             else if (desiredPostion.x - initialPostion.x === -1 && desiredPostion.y - initialPostion.y === pawnDirection) {
+//                 //ATTACK IN UPPER OR BOTTOM LEFT CORNER
+
+//                 if (this.tileIsOccupiedByOpponent(desiredPostion, boardState, team)) {
+//                     return true;
+//                 }
+//             }
+//             else if (desiredPostion.x - initialPostion.x === 1 && desiredPostion.y - initialPostion.y === pawnDirection) {
+//                 // ATTACK ON UPPER OR BOTTOM RIGHT CORNER
+
+//                 if (this.tileIsEmptyOrOccupiedbyOpponent(desiredPostion, boardState, team)) {
+//                     return true;
+//                 }
+//             }
+//         } else if (type === PieceType.KNIGHT) {
+//             for (let i = -1; i < 2; i += 2) {
+//                 for (let j = -1; j < 2; j += 2) {
+
+//                     // TOP AND BOTTON SIDE MOVEMENT
+//                     if (desiredPostion.y - initialPostion.y === 2 * i) {
+
+//                         if (desiredPostion.x - initialPostion.x === j) {
+//                             if (
+
+//                                 this.tileIsEmptyOrOccupiedbyOpponent(desiredPostion, boardState, team)) {
+
+//                             }{
+//                                 return true
+//                             }
+                            
+//                         }
+
+//                     }
+//                     //RIGHT AND LEFT SIDE MOVEMENT
+//                     if (desiredPostion.x - initialPostion.x === 2 * i) {
+//                         if (desiredPostion.y - initialPostion.y === j) {
+//                             if (
+
+//                                 this.tileIsEmptyOrOccupiedbyOpponent(desiredPostion, boardState, team)) {
+
+//                             }{
+//                                 return true
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }else if (type === PieceType.BISHOP) {
+// // MOVEMENT LOGIC AND ATTACK LOGIC FOR THE BISHOP
+
+// // UP RIGHT MOVEMENT
+
+// for(let i=1;i<8;i++){
+//     // UP RIGHT MOVEMENT
+// if(desiredPostion.x>initialPostion.x && desiredPostion.y > initialPostion.y){
+//    let passedPosition: postion={x: initialPostion.x + i , y: initialPostion.y+i}
+//   //check if tile is the destination tile
+//   if(passedPosition.x === desiredPostion.x &&  passedPosition.y===desiredPostion.y){
+// //Dealing with destination tile
+// if(this.tileIsEmptyOrOccupiedbyOpponent(passedPosition, boardState, team )){
+//  return true
+// }
+//  }else{
+//     // dealing with passing tile
+//     if(this.tileIsOccupied(passedPosition,boardState)){
+// break
+//     } 
+//   }
+// }
+
+
+
+
+// // bottom RIGHT MOVEMENT
+
+// if(desiredPostion.x > initialPostion.x && desiredPostion.y<initialPostion.y){
+    
+//     let passedPosition:postion ={x:initialPostion.x+i, y:initialPostion.y-i};
+// //check if the tile is destination tile
+// if(passedPosition.x=== desiredPostion.x && passedPosition.y=== desiredPostion.y){
+//     // dealing with passing tile
+// if(this.tileIsEmptyOrOccupiedbyOpponent(passedPosition, boardState, team)){
+//     return true;
+// }
+// }
+// else{
+//     if(this.tileIsOccupied(passedPosition, boardState)){
+       
+//         break;
+//     }   
+// }
+
+// }
+
+
+
+   
+// //bottom LEFT MOVEMENT
+// if(desiredPostion.x<initialPostion.x && desiredPostion.y<initialPostion.y ){
+
+// let passedPosition:postion ={x:initialPostion.x-i, y:initialPostion.y-i}
+// //check if the tile is destination tile
+// if(passedPosition.x=== desiredPostion.x && passedPosition.y=== desiredPostion.y){
+//     // dealing with passing tile
+// if(this.tileIsEmptyOrOccupiedbyOpponent(passedPosition, boardState, team)){
+//     return true;
+// }
+// }
+// else{
+//     if(this.tileIsOccupied(passedPosition, boardState)){
+       
+//         break;
+//     }   
+// }
+
+// }
+       
+
+// //top LEFT MOVEMENT
+
+// if(desiredPostion.x<initialPostion.x && desiredPostion.y<initialPostion.y ){
+
+    
+//     let passedPosition: postion={x:initialPostion.x-i, y:initialPostion.y+i}
+// //check if the tile is destination tile
+// if(passedPosition.x=== desiredPostion.x && passedPosition.y=== desiredPostion.y){
+//     // dealing with passing tile
+// if(this.tileIsEmptyOrOccupiedbyOpponent(passedPosition, boardState, team)){
+//     return true;
+// }
+// }
+// else{
+//     if(this.tileIsOccupied(passedPosition, boardState)){
+       
+//         break;
+//     }   
+// }
+// }                  
+// }
+//  }
+//  else if(type === PieceType.ROOK){
+   
+//     if(initialPostion.x===desiredPostion.x){
+//         console.log("we are verticalyy")
+
+//         for(let i=1;i<8;i++){
+        
+        
+//             let multiplier= (desiredPostion.y<initialPostion.y)?-1:1;
+//             let passedPostion:postion={x:initialPostion.x, y:initialPostion.y+(i*multiplier)}
+         
+//           if(passedPostion.x===desiredPostion.x  && passedPostion.y===desiredPostion.y){
+//             console.log("arrived!")
+//             break
+//         }
+        
+//         }
+// // aaaaaa
+
+
+// if(initialPostion.y===desiredPostion.y){
+//     console.log("moving horizontal")
+//     for(let i=1;i<8;i++){
+// let multiplier =(desiredPostion.x<initialPostion.x)?-1:1;
+
+//         let passedPosition:postion={x:initialPostion.x+(i*multiplier), y:initialPostion.y};
+        
+//         if(passedPosition.x===desiredPostion.x  && passedPosition.y===desiredPostion.y){
+//     console.log("arrived!")
+//     return true;
+
+// }else{
+//     console.log("Passing by....");
+// }
+// } 
+// }
+// }
+// }
+//         return false;
+//     }
+// }
+
+
+
